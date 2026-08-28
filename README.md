@@ -8,8 +8,7 @@
   <a href="#overview">Overview</a> ·
   <a href="#data">Data</a> ·
   <a href="#quick-start">Quick Start</a> ·
-  <a href="#running-the-benchmark">Experiments</a> ·
-  <a href="#repository-structure">Structure</a>
+  <a href="#experiments">Experiments</a>
 </p>
 
 <p align="center">
@@ -18,22 +17,15 @@
 
 ## Overview
 
-WindADBench is the research codebase for evaluating wind-turbine SCADA anomaly
-detectors as **alarm systems**, rather than point classifiers alone. It compares
-36 detectors from six model families across four leakage-controlled evaluation
-tracks and jointly measures detection quality, warning earliness, false-alarm
-reliability, and computational cost.
+WindADBench evaluates wind-turbine SCADA anomaly detectors as **alarm systems**.
+It compares 36 detectors from six model families across four evaluation tracks,
+covering detection quality, warning earliness, reliability, and cost.
 
 ### Highlights
 
-- **Heterogeneous industrial data:** three wind farms with different turbine
-  fleets, sensor schemas, operating conditions, and fault distributions.
-- **Four evaluation tracks:** in-farm detection, normal-operation reliability,
-  held-out-turbine transfer, and directed cross-farm transfer.
-- **Broad model coverage:** non-learning, machine-learning, deep-learning,
-  language-model-based, time-series-pretrained, and domain-adapted methods.
-- **Operational evaluation:** 25 metrics spanning point-, event-, range-, and
-  affiliation-level detection, early warning, false alarms, runtime, and memory.
+- Three heterogeneous wind farms with different turbine fleets and sensor schemas.
+- Four tracks covering in-farm, normal-operation, cross-turbine, and cross-farm settings.
+- 36 detectors from six families, evaluated with detection and operational metrics.
 
 ### Benchmark at a Glance
 
@@ -47,8 +39,8 @@ reliability, and computational cost.
 | Normal sequences | 11 | 9 | 31 | 51 |
 | All sequences | 22 | 15 | 58 | 95 |
 
-All SCADA measurements are sampled at 10-minute intervals. Together, the 95
-event-centered sequences cover approximately 89 turbine-years.
+The 95 event-centered sequences contain 10-minute SCADA measurements spanning
+approximately 89 turbine-years.
 
 ### Evaluation Tracks
 
@@ -59,18 +51,13 @@ event-centered sequences cover approximately 89 turbine-years.
 | **Track 3** | Cross-turbine | Fixed held-out turbines within each farm |
 | **Track 4** | Cross-farm | Six directed transfers among Farms A, B, and C |
 
-Tracks 1–2 use each farm's full sensor schema. Tracks 3–4 use the shared
-semantic features `wind_speed`, `active_power`, and `rotor_speed`. Grid-evaluated
-methods in Track 1 are summarized over eight predefined operating points;
-methods with native decision procedures retain their native outputs. Transfer
-labels are derived under a common 1% normal-point false-positive budget using
-only the calibration data permitted by the corresponding protocol.
+Tracks 1–2 use each farm's full sensor schema. Tracks 3–4 use the shared semantic
+features `wind_speed`, `active_power`, and `rotor_speed`.
 
 ## Data
 
-The three raw wind-farm datasets are **not stored in this Git repository**
-because of their size. Place the `Wind Farm A`, `Wind Farm B`, and `Wind Farm C`
-directories in the repository root using the following layout:
+The raw datasets are not stored in this repository because of their size. Place
+the three wind-farm directories in the repository root as follows:
 
 ```text
 WindADBench/
@@ -91,80 +78,59 @@ WindADBench/
         └── feature_description.csv
 ```
 
-Each event file contains a normal training partition and a prediction
-partition. `event_info.csv` records event labels and anomaly boundaries, while
-`feature_description.csv` describes the anonymized sensors and their units.
+Each farm contains event sequences, event metadata, and feature descriptions.
 The benchmark builds `WIND_AD_META.csv` from this structure when needed.
 
 ## Quick Start
 
-Clone the repository and initialize its submodules:
+Clone the repository and create the released environment:
 
 ```bash
 git clone https://github.com/ZJU-DAILY/WindADBench.git
 cd WindADBench
 git submodule update --init --recursive
-```
-
-Create the released environment:
-
-```bash
 conda env create -f environment.yml
 conda activate wind_benchmark
 ```
 
-Some LLM-based and time-series-pretrained baselines require external model
-weights. The weights are not committed to this repository; official sources,
-expected paths, and checksums are listed in [models/README.md](models/README.md).
+External model weights are not included. Download instructions, expected paths,
+and checksums are provided in [models/README.md](models/README.md).
 
-## Running the Benchmark
+## Experiments
 
-Baseline scripts are grouped by model family and output type under
-`scripts/baselines/`. For example, run LOF with continuous anomaly scores:
+Run a score-based baseline:
 
 ```bash
 bash scripts/baselines/non_learning/score/lof.sh
 ```
 
-Run the corresponding native-label evaluation with:
+Run its label-based evaluation:
 
 ```bash
 bash scripts/baselines/non_learning/label/lof.sh
 ```
 
-Score runs defer the slow VUS metrics by default. Recompute them after the main
-runs with:
+Recompute deferred VUS metrics:
 
 ```bash
 bash scripts/recompute_score_vus.sh 8
 ```
 
-For a cross-turbine or cross-farm experiment, select a source farm explicitly:
+Run a transfer experiment from source Farm A:
 
 ```bash
 bash experiments/cross_domain/scripts/baselines/non_learning/lof.sh A
 ```
 
-Replace `A` with `B` or `C` to train the corresponding source-farm model. The
-cross-domain pipeline stores resolved configurations, fixed split plans,
-calibration records, predictions, resource measurements, and aggregated
-results under `experiments/cross_domain/outputs/`.
-
-## Repository Structure
+Replace `A` with `B` or `C` for another source farm.
 
 ```text
 WindADBench/
-├── config/                         # Track 1–2 evaluation templates
-├── experiments/cross_domain/       # Track 3–4 protocols and launchers
-├── models/                         # External model-asset instructions
-├── scripts/baselines/              # Per-model score and label runs
-└── tsad_benchmark/
-    ├── baselines/                  # Model implementations and adapters
-    ├── data/                       # Data loading and preprocessing
-    ├── evaluation/                 # Metrics and evaluation strategies
-    └── report/                     # Aggregation and report generation
+├── config/                    # Evaluation templates
+├── experiments/cross_domain/  # Track 3–4 experiments
+├── models/                    # Model-asset instructions
+├── scripts/baselines/         # Per-model launchers
+└── tsad_benchmark/            # Benchmark implementation
 ```
 
-The released experiment configurations use random seed `2026`. Per-model
-hyperparameters are recorded in the launch scripts and in
-`experiments/cross_domain/configs/models/`.
+Experiment settings are recorded in the configuration files and launch scripts.
