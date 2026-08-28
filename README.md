@@ -51,7 +51,7 @@ approximately 89 turbine-years.
 | **Track 3** | Cross-turbine | Fixed held-out turbines within each farm |
 | **Track 4** | Cross-farm | Six directed transfers among Farms A, B, and C |
 
-Tracks 1–2 use each farm's full sensor schema. Tracks 3–4 use the shared semantic
+Tracks 1–2 use each farm's full sensor schema. Tracks 4 use the shared semantic
 features `wind_speed`, `active_power`, and `rotor_speed`.
 
 ## Data
