@@ -15,7 +15,9 @@
   <img src="assets/framework.png" width="95%" alt="WindADBench framework">
 </p>
 
-## Overview
+---
+
+## ✨ Overview
 
 WindADBench evaluates wind-turbine SCADA anomaly detectors as **alarm systems**.
 It compares 36 detectors from six model families across four evaluation tracks,
@@ -23,9 +25,9 @@ covering detection quality, warning earliness, reliability, and cost.
 
 ### Highlights
 
-- Three heterogeneous wind farms with different turbine fleets and sensor schemas.
-- Four tracks covering in-farm, normal-operation, cross-turbine, and cross-farm settings.
-- 36 detectors from six families, evaluated with detection and operational metrics.
+- **Heterogeneous data** — three wind farms with different turbine fleets and sensor schemas.
+- **Four evaluation tracks** — in-farm, normal-operation, cross-turbine, and cross-farm settings.
+- **Broad model coverage** — 36 detectors from six families with detection and operational metrics.
 
 ### Benchmark at a Glance
 
@@ -54,10 +56,12 @@ approximately 89 turbine-years.
 Tracks 1–2 use each farm's full sensor schema. Tracks 4 use the shared semantic
 features `wind_speed`, `active_power`, and `rotor_speed`.
 
-## Data
+---
 
-The raw datasets are not stored in this repository because of their size. Place
-the three wind-farm directories in the repository root as follows:
+## 📊 Data
+
+> **Note:** The raw datasets are not stored in this repository because of their
+> size. Place the three wind-farm directories in the repository root as follows.
 
 ```text
 WindADBench/
@@ -81,7 +85,9 @@ WindADBench/
 Each farm contains event sequences, event metadata, and feature descriptions.
 The benchmark builds `WIND_AD_META.csv` from this structure when needed.
 
-## Quick Start
+---
+
+## 🚀 Quick Start
 
 Clone the repository and create the released environment:
 
@@ -96,7 +102,9 @@ conda activate wind_benchmark
 External model weights are not included. Download instructions, expected paths,
 and checksums are provided in [models/README.md](models/README.md).
 
-## Experiments
+---
+
+## 🧪 Experiments
 
 Run a score-based baseline:
 
@@ -123,6 +131,8 @@ bash experiments/cross_domain/scripts/baselines/non_learning/lof.sh A
 ```
 
 Replace `A` with `B` or `C` for another source farm.
+
+### Repository Layout
 
 ```text
 WindADBench/
