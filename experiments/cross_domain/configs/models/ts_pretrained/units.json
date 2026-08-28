@@ -1,0 +1,20 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "UniTS",
+      "model_path": "tsad_benchmark.baselines.ts_pretrained.units.UniTSModel",
+      "model_hyper_params": {
+        "checkpoint_path": "models/UniTS/units_x32_pretrain_checkpoint.pth",
+        "local_files_only": true,
+        "mode": "zero_shot",
+        "win_size": 96,
+        "device": "cuda"
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

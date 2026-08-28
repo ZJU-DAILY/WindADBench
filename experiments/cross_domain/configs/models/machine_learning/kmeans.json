@@ -1,0 +1,17 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "KMeans",
+      "model_path": "tsad_benchmark.baselines.machine_learning.kmeans.KMeansModel",
+      "model_hyper_params": {
+        "n_clusters": 20,
+        "window_size": 50
+      },
+      "expected_output": "score",
+      "transfer_adapter": "kmeans_segmented"
+    }
+  ]
+}

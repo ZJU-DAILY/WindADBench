@@ -1,0 +1,18 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "OmniAnomaly",
+      "model_path": "tsad_benchmark.baselines.deep_learning.omnianomaly.OmniAnomalyModel",
+      "model_hyper_params": {
+        "win_size": 100,
+        "latent_dim": 8,
+        "num_epochs": 10
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

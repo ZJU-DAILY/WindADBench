@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+cd "$(dirname "$0")/../../../.."
+
+python scripts/run_benchmark.py \
+  --config-path        unfixed_score.json \
+  --model-name         USAD \
+  --model-path         tsad_benchmark.baselines.deep_learning.usad.USADModel \
+  --model-hyper-params '{"win_size": 48, "hidden_dim": 64, "num_epochs": 30}' \
+  --save-path          results/deep_learning/score/usad.csv \
+  --defer-score-vus \
+  --report-dir         results/deep_learning/score/usad_report

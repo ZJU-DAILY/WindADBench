@@ -1,0 +1,40 @@
+# Python / IDE
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Logs and local run artifacts
+*.log
+
+# Raw wind-farm SCADA data (large; keep local or use separate distribution)
+Wind Farm A/
+Wind Farm B/
+Wind Farm C/
+
+# Full benchmark result CSVs (embed per-series pickles; very large)
+results/
+
+# Misc local data dumps at repo root
+/hbos.csv
+/73_*.csv
+/event_info_*.csv
+# Downloaded pretrained model files
+/models/MOMENT-1-large/
+/models/chronos-bolt-base/
+/models/gpt2/
+
+# Large model weights / exported models
+*.safetensors
+*.bin
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.tflite
+*.h5
+*.msgpack
+*.ot

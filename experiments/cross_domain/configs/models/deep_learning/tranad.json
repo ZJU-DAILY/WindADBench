@@ -1,0 +1,18 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "TranAD",
+      "model_path": "tsad_benchmark.baselines.deep_learning.tranad.TranADModel",
+      "model_hyper_params": {
+        "win_size": 10,
+        "lr": 0.001,
+        "num_epochs": 5
+      },
+      "expected_output": "score",
+      "transfer_adapter": "dlbase_segmented"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "DADA",
+      "model_path": "tsad_benchmark.baselines.ts_pretrained.dada.DADAModel",
+      "model_hyper_params": {
+        "model_id": "models/DADA",
+        "local_files_only": true,
+        "mode": "zero_shot",
+        "win_size": 100,
+        "batch_size": 16,
+        "norm": false,
+        "score_mode": "mse",
+        "copies": 10,
+        "device": "cuda"
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

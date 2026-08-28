@@ -1,0 +1,4 @@
+[submodule "tsad_benchmark/baselines/llm_based/UniTime"]
+	path = tsad_benchmark/baselines/llm_based/UniTime
+	url = https://github.com/happy-puppy21/UniTime.git
+	branch = windadbench-adapter

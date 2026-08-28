@@ -1,0 +1,25 @@
+{
+  "data_config": {
+    "dataset_root": null,
+    "series_limit": null,
+    "rebuild_meta": false
+  },
+  "model_config": {
+    "recommend_hyper_params": {
+      "seed": 2026
+    },
+    "models": []
+  },
+  "evaluation_config": {
+    "metrics": "all",
+    "strategy_args": {
+      "strategy_name": "unfixed_detect_label",
+      "strict_length": true,
+      "strict_errors": true
+    }
+  },
+  "report_config": {
+    "generate_report": true,
+    "export_figures": true
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "Chronos",
+      "model_path": "tsad_benchmark.baselines.ts_pretrained.chronos.ChronosModel",
+      "model_hyper_params": {
+        "model_id": "models/chrones-bolt-base",
+        "local_files_only": true,
+        "context_length": 96,
+        "prediction_length": 1,
+        "batch_size": 64,
+        "forecast_batch_size": 2048,
+        "device": "cuda"
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

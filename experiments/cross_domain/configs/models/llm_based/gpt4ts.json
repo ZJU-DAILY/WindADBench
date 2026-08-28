@@ -1,0 +1,28 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "GPT4TS",
+      "model_path": "tsad_benchmark.baselines.llm_based.gpt4ts.GPT4TSModel",
+      "model_hyper_params": {
+        "backbone": "models/gpt2",
+        "local_files_only": true,
+        "win_size": 100,
+        "num_epochs": 10,
+        "batch_size": 64,
+        "sampling_rate": 0.05,
+        "sampling_strategy": "uniform",
+        "gpt_layers": 3,
+        "d_ff": 32,
+        "lradj": "type1",
+        "device": "cuda",
+        "max_features": 768,
+        "feature_select": "train_variance"
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

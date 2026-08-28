@@ -1,0 +1,27 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "CATCH",
+      "model_path": "tsad_benchmark.baselines.deep_learning.catch.CATCHAnomalyModel",
+      "model_hyper_params": {
+        "win_size": 96,
+        "patch_size": 16,
+        "patch_stride": 16,
+        "num_epochs": 3,
+        "batch_size": 16,
+        "d_model": 16,
+        "d_ff": 64,
+        "cf_dim": 32,
+        "head_dim": 16,
+        "n_heads": 2,
+        "auxi_lambda": 0.1,
+        "dc_lambda": 0.1
+      },
+      "expected_output": "score",
+      "transfer_adapter": "dlbase_segmented"
+    }
+  ]
+}

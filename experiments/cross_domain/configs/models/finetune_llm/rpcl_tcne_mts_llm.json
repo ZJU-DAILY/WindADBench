@@ -1,0 +1,27 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "RPCL-TCNE-MTS-LLM",
+      "model_path": "tsad_benchmark.baselines.finetune_llm.rpcl_tcne_mts_llm.RPCLTCNEMTSLLMModel",
+      "model_hyper_params": {
+        "backbone": "models/gpt2",
+        "local_files_only": true,
+        "win_size": 22,
+        "train_stride": 4,
+        "batch_size": 512,
+        "num_epochs": 6,
+        "lr": 0.0004,
+        "tcne_hidden_dim": 44,
+        "tcne_blocks": 10,
+        "kernel_size": 3,
+        "dropout": 0.2,
+        "lora_rank": 4
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

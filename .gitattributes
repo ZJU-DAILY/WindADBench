@@ -1,0 +1,9 @@
+# Force LF line endings for shell scripts and other Linux-bound text files.
+# Without this, scripts edited on Windows pick up CRLF and break with errors
+# like:  set: pipefail: invalid option name
+*.sh        text eol=lf
+*.py        text eol=lf
+*.json      text eol=lf
+*.yaml      text eol=lf
+*.yml       text eol=lf
+*.md        text eol=lf

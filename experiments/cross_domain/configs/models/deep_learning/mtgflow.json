@@ -1,0 +1,19 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "MTGFlow",
+      "model_path": "tsad_benchmark.baselines.deep_learning.mtgflow.MTGFlowModel",
+      "model_hyper_params": {
+        "win_size": 60,
+        "batch_size": 64,
+        "num_epochs": 40,
+        "train_stride": 10
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

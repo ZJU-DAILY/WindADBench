@@ -1,0 +1,27 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "GDN",
+      "model_path": "tsad_benchmark.baselines.deep_learning.gdn.GDNModel",
+      "model_hyper_params": {
+        "win_size": 48,
+        "slide_stride": 6,
+        "num_epochs": 30,
+        "patience": 5,
+        "topk": 15,
+        "eval_topk": 3,
+        "dim": 64,
+        "batch_size": 64,
+        "out_layer_num": 1,
+        "out_layer_inter_dim": 256,
+        "val_ratio": 0.1,
+        "decay": 0.0
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "HBOS",
+      "model_path": "tsad_benchmark.baselines.non_learning.hbos.HBOSModel",
+      "model_hyper_params": {
+        "n_bins": 10,
+        "contamination": 0.05
+      },
+      "expected_output": "score",
+      "transfer_adapter": "point_concat"
+    }
+  ]
+}

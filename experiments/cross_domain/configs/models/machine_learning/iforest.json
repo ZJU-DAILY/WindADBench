@@ -1,0 +1,17 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "IForest",
+      "model_path": "tsad_benchmark.baselines.machine_learning.iforest.IForestModel",
+      "model_hyper_params": {
+        "n_estimators": 200,
+        "contamination": 0.05
+      },
+      "expected_output": "score",
+      "transfer_adapter": "point_concat"
+    }
+  ]
+}

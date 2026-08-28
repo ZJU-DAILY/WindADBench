@@ -1,0 +1,21 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "TimesNet",
+      "model_path": "tsad_benchmark.baselines.deep_learning.timesnet.TimesNetModel",
+      "model_hyper_params": {
+        "win_size": 100,
+        "d_model": 64,
+        "d_ff": 64,
+        "e_layers": 2,
+        "top_k": 5,
+        "num_epochs": 3
+      },
+      "expected_output": "score",
+      "transfer_adapter": "dlbase_segmented"
+    }
+  ]
+}
