@@ -27,22 +27,35 @@ def percentile_label_maps(
     test_scores: np.ndarray,
     reference_scores: Optional[np.ndarray],
     anomaly_ratios: Sequence[float],
+    m: str = "tt",
 ) -> dict[str, np.ndarray]:
-    test = _finite_1d(test_scores)
-    ref = _finite_1d(reference_scores)
-    pool = test if ref.size == 0 else np.concatenate([ref, test], axis=0)
+    tes = _finite_1d(test_scores)
+    trs = _finite_1d(reference_scores)
+    pool = _cs(trs, tes, m=m)
     preds: dict[str, np.ndarray] = {}
     for ratio in anomaly_ratios:
         ratio = float(np.clip(ratio, 0.0, 100.0))
-        if ratio <= 0.0 or test.size == 0:
-            labels = np.zeros(test.shape[0], dtype=np.int32)
+        if ratio <= 0.0 or tes.size == 0:
+            labels = np.zeros(tes.shape[0], dtype=np.int32)
         elif ratio >= 100.0:
-            labels = np.ones(test.shape[0], dtype=np.int32)
+            labels = np.ones(tes.shape[0], dtype=np.int32)
         else:
             threshold = float(np.percentile(pool, 100.0 - ratio))
-            labels = (test > threshold).astype(np.int32)
+            labels = (tes > threshold).astype(np.int32)
         preds[str(ratio)] = labels
     return preds
+
+
+def _cs(trs: Optional[np.ndarray], tes: Optional[np.ndarray], m: str = "tt") -> np.ndarray:
+    trs = _finite_1d(trs)
+    tes = _finite_1d(tes)
+    if m == "t":
+        if trs.size == 0:
+            raise ValueError("Empty reference scores.")
+        return trs
+    if m == "tt":
+        return tes if trs.size == 0 else np.concatenate([trs, tes], axis=0)
+    raise ValueError(f"Unknown mode: {m}")
 
 
 def pot_label_maps(

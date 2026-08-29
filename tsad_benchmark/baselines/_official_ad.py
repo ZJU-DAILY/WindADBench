@@ -8,7 +8,7 @@ from typing import Optional, Sequence
 import numpy as np
 import pandas as pd
 
-from tsad_benchmark.baselines._thresholding import normalize_anomaly_ratios
+from tsad_benchmark.baselines._thresholding import _cs, normalize_anomaly_ratios
 
 
 def to_2d_array(data) -> np.ndarray:
@@ -75,6 +75,7 @@ def percentile_labels(
     test_label=None,
     apply_adjustment: bool = False,
     threshold_test_scores: Optional[np.ndarray] = None,
+    m: str = "tt",
 ) -> dict[str, np.ndarray]:
   
 
@@ -89,7 +90,7 @@ def percentile_labels(
         if threshold_test_scores is None
         else np.nan_to_num(np.asarray(threshold_test_scores, dtype=float).reshape(-1))
     )
-    pool = threshold_test if train.size == 0 else np.concatenate([train, threshold_test], axis=0)
+    pool = _cs(train, threshold_test, m=m)
     gt = labels_1d(test_label)
     preds: dict[str, np.ndarray] = {}
     for ratio in normalize_anomaly_ratios(anomaly_ratios):

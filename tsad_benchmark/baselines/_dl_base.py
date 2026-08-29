@@ -13,6 +13,7 @@ import pandas as pd
 from tsad_benchmark.models.base import AnomalyModelBase, ModelCapability
 from tsad_benchmark.baselines._thresholding import (
     DEFAULT_ANOMALY_RATIOS,
+    _cs,
     normalize_anomaly_ratios,
 )
 
@@ -316,11 +317,9 @@ class DLBaseModel(AnomalyModelBase):
         test_threshold_scores = self._inference_scores(arr, criterion, mode="test")
         if test_threshold_scores.size == 0:
             test_threshold_scores = raw_test_scores
-        train_scores = self._train_scores
-        if train_scores is None or train_scores.size == 0:
-            combined = test_threshold_scores
-        else:
-            combined = np.concatenate([train_scores, test_threshold_scores], axis=0)
+        trs = self._train_scores
+        tes = test_threshold_scores
+        combined = _cs(trs, tes)
 
         preds = {}
         for ratio in self.anomaly_ratio:
