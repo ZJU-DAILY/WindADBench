@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import pandas, openpyxl; print\\(pandas.__version__, openpyxl.__version__\\)\")",
+      "Read(//Users/syf/miniconda3/**)",
+      "Read(//Users/syf/anaconda3/**)",
+      "Read(//opt/homebrew/bin/**)",
+      "Bash(git -C /Users/syf/Desktop/website remote -v)",
+      "Bash(git -C /Users/syf/Desktop/website log --oneline -8)",
+      "Read(//private/tmp/**)",
+      "Bash(uv run --quiet --with pandas --with openpyxl python -c ' *)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(node -e \"try{require.resolve\\('puppeteer'\\);console.log\\('puppeteer ok'\\)}catch\\(e\\){console.log\\('no puppeteer'\\)}\")",
+      "Bash(node test_policy.js)",
+      "Bash(awk -F: '{print $3}')",
+      "Read(//Users/syf/Library/Fonts/**)",
+      "Bash(fc-list)"
+    ]
+  }
+}

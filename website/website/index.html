@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WindADBench · Benchmark System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="turbine">
+      <line x1="32" y1="30" x2="32" y2="62" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <g stroke="currentColor" stroke-width="3" stroke-linecap="round">
+        <line x1="32" y1="30" x2="32" y2="8"/>
+        <line x1="32" y1="30" x2="51" y2="41"/>
+        <line x1="32" y1="30" x2="13" y2="41"/>
+      </g>
+      <circle cx="32" cy="30" r="3.5" fill="currentColor"/>
+    </g>
+  </defs>
+</svg>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="brand" href="#overview">
+      <svg viewBox="0 0 64 64" class="brand-ico"><use href="#turbine"/></svg>
+      WindAD<span>Bench</span>
+    </a>
+    <div class="links" id="nav">
+      <a href="#overview">Overview</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#models">Models</a>
+      <a href="#workloads">Workloads</a>
+      <a href="#agent">Decision Agent</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= OVERVIEW ================= -->
+<main id="view-overview" class="view">
+  <header class="hero">
+    <svg class="hero-turbines" viewBox="0 0 300 120" aria-hidden="true">
+      <g class="wt wt1"><use href="#turbine" transform="translate(20,40) scale(1.1)"/></g>
+      <g class="wt wt2"><use href="#turbine" transform="translate(120,20) scale(1.5)"/></g>
+      <g class="wt wt3"><use href="#turbine" transform="translate(230,50) scale(0.9)"/></g>
+    </svg>
+    <div class="wrap">
+      <h1>WindADBench</h1>
+      <p class="tagline">Wind-turbine anomaly detectors, evaluated as alarm systems rather than
+      point classifiers — across three real SCADA farms and three transfer settings.</p>
+      <div class="stats">
+        <div class="stat"><b>36</b><span>detectors</span></div>
+        <div class="stat"><b>12</b><span>workloads</span></div>
+        <div class="stat"><b>3</b><span>wind farms</span></div>
+        <div class="stat"><b>95</b><span>labeled events</span></div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="cards entry">
+      <a class="card" href="#leaderboard"><h3>Leaderboard</h3>
+        <span>Rank every detector on any workload, by any of 29 metrics.</span></a>
+      <a class="card" href="#models"><h3>Models</h3>
+        <span>Capability card and per-workload results for each detector.</span></a>
+      <a class="card" href="#workloads"><h3>Workloads</h3>
+        <span>Difficulty, event support, cost, and diagnostic value.</span></a>
+      <a class="card hi" href="#agent"><h3>Decision Agent →</h3>
+        <span>Pick a detector for your site, or plan a cheap evaluation for a new one.</span></a>
+    </div>
+  </div>
+</main>
+
+<!-- ================= LEADERBOARD ================= -->
+<main id="view-leaderboard" class="view">
+  <div class="wrap">
+    <h2>Leaderboard</h2>
+    <div class="fam-legend" id="lb-legend"></div>
+    <div class="controls">
+      <label>Track
+        <select id="lb-track">
+          <option value="in-farm">In-farm (T1)</option>
+          <option value="cross-turbine">Cross-turbine (T3)</option>
+          <option value="cross-farm">Cross-farm (T4)</option>
+        </select></label>
+      <label>Workload <select id="lb-workload"></select></label>
+      <label>Family <select id="lb-family"></select></label>
+      <input id="lb-search" type="search" placeholder="filter models…">
+    </div>
+    <div class="grouptabs" id="lb-groups"></div>
+    <div class="tablewrap tall"><table id="lb-table"></table></div>
+    <p class="fineprint">Click a column to rank by it; top-3 highlighted.</p>
+  </div>
+</main>
+
+<!-- ================= MODELS ================= -->
+<main id="view-models" class="view">
+  <div class="wrap">
+    <h2>Model Profiles</h2>
+    <div class="fam-legend" id="md-legend"></div>
+    <div class="controls">
+      <label>Family <select id="md-family"></select></label>
+      <label class="check" style="align-self:center"><input type="checkbox" id="md-cpu"> CPU-only</label>
+      <input id="md-search" type="search" placeholder="filter models…">
+    </div>
+    <div class="tablewrap"><table id="md-table"></table></div>
+    <div id="md-detail"></div>
+  </div>
+</main>
+
+<!-- ================= WORKLOADS ================= -->
+<main id="view-workloads" class="view">
+  <div class="wrap">
+    <h2>Workload Profiles</h2>
+    <p class="note small">Each workload is a versioned ⟨farm, turbine-set, event-set⟩ task.
+    Click a row for its local top models.</p>
+    <div class="tablewrap"><table id="wl-table"></table></div>
+    <div id="wl-detail"></div>
+  </div>
+</main>
+
+<!-- ================= DECISION AGENT ================= -->
+<main id="view-agent" class="view">
+  <div class="wrap">
+    <div class="page-head">
+      <h2>Decision Agent</h2>
+      <button class="btn ghost small" id="llm-open">Explanations…</button>
+    </div>
+    <p class="lede">Two deterministic policies read the published evidence matrix.
+      <b>D2M</b> turns a deployment profile into a detector portfolio — or abstains when the
+      evidence is too thin. <b>M2B</b> turns a new detector into a budgeted evaluation plan.
+      Everything is computed in your browser from the same knowledge base as the paper;
+      the optional language model only puts the result into words, it never changes it.</p>
+
+    <div class="da-tabs" id="da-tabs">
+      <button class="da-tab active" data-t="d2m">D2M · Which detector for my site?</button>
+      <button class="da-tab" data-t="m2b">M2B · How should I evaluate my detector?</button>
+    </div>
+
+    <!-- ---- D2M ---- -->
+    <section id="da-d2m" class="da-pane active">
+      <div class="da-form">
+        <div class="field-row">
+          <label>Turbines <input type="number" id="nd-turbines" value="10" min="1"></label>
+          <label>SCADA channels <input type="number" id="nd-features" value="200" min="1"></label>
+          <label>Site
+            <select id="nd-type"><option value="onshore">onshore</option><option value="offshore" selected>offshore</option></select></label>
+          <label>Fault labels
+            <select id="nd-labels"><option value="no">none (cold start)</option><option value="yes">available</option></select></label>
+        </div>
+        <div class="field-row preset-row">
+          <span class="row-label">Priority</span>
+          <div class="presets" id="nd-presets"></div>
+        </div>
+        <details class="adv">
+          <summary>Advanced — custom weights and hard constraints</summary>
+          <div class="adv-grid">
+            <div>
+              <h4>Dimension weights</h4>
+              <div id="nd-sliders"></div>
+            </div>
+            <div>
+              <h4>Hard constraints</h4>
+              <label class="check"><input type="checkbox" id="nd-cpu"> CPU-only site</label>
+              <label class="inline">Max false alarms / turbine-day <input type="number" id="nd-fa" min="0" step="0.5" placeholder="none"></label>
+              <label class="inline">Max model size (MB) <input type="number" id="nd-size" min="0" step="10" placeholder="none"></label>
+              <label class="inline">Min early-detection rate <input type="number" id="nd-early" min="0" max="1" step="0.05" placeholder="none"></label>
+              <label class="inline">Max inference time (s) <input type="number" id="nd-infer" min="0" step="0.01" placeholder="none"></label>
+            </div>
+          </div>
+        </details>
+      </div>
+      <div id="nd-out" class="da-result"></div>
+    </section>
+
+    <!-- ---- M2B ---- -->
+    <section id="da-m2b" class="da-pane">
+      <ol class="steps">
+        <li class="step">
+          <div class="step-head"><span class="step-n">1</span>
+            <h3>Follow the active evaluation plan</h3></div>
+          <p class="note small" id="nm-lede"></p>
+          <div class="plan-grid">
+            <ol class="order" id="nm-order"></ol>
+            <div id="nm-chart"></div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-head"><span class="step-n">2</span>
+            <h3>Enter what you measured</h3></div>
+          <p class="note small">One row per workload you ran. Empty fields are ignored —
+            a dimension is only scored when at least one of its metrics is present.</p>
+          <div id="nm-rows"></div>
+          <div class="rowbtns">
+            <button class="btn small" id="nm-add">+ add workload</button>
+            <button class="btn primary small" id="nm-run">Position my detector</button>
+          </div>
+          <details class="adv">
+            <summary>Cost measurements — enables the cost dimension</summary>
+            <div class="field-row">
+              <label>Inference time (s) <input type="number" step="any" id="nm-infer" placeholder="—"></label>
+              <label>GPU memory (MB) <input type="number" step="any" id="nm-gpu" placeholder="0 if CPU-only"></label>
+              <label>Model size (MB) <input type="number" step="any" id="nm-size" placeholder="—"></label>
+            </div>
+          </details>
+        </li>
+        <li class="step">
+          <div class="step-head"><span class="step-n">3</span>
+            <h3>Read the position</h3></div>
+          <div id="nm-out" class="da-result"></div>
+        </li>
+      </ol>
+    </section>
+  </div>
+</main>
+
+<!-- ================= LLM SETTINGS ================= -->
+<dialog id="llm-dialog">
+  <form method="dialog" class="llm-form">
+    <h3>Explanation settings</h3>
+    <p class="note small">The agent's decisions are computed locally and never depend on a
+      language model. If you supply an <b>OpenAI-compatible</b> endpoint, the site can additionally
+      generate a written explanation of a result. Your key is kept in this browser's
+      <code>localStorage</code>, sent only to the endpoint you name, and never to us.</p>
+    <label class="stack">Base URL
+      <input type="url" id="llm-url" placeholder="https://api.deepseek.com/v1" autocomplete="off"></label>
+    <label class="stack">API key
+      <input type="password" id="llm-key" placeholder="sk-…" autocomplete="off"></label>
+    <label class="stack">Model
+      <input type="text" id="llm-model" placeholder="deepseek-chat" autocomplete="off"></label>
+    <p class="fineprint" id="llm-resolved"></p>
+    <div class="rowbtns">
+      <button class="btn primary small" id="llm-save" value="save">Save</button>
+      <button class="btn small" id="llm-test" type="button">Test connection</button>
+      <button class="btn small" id="llm-clear" type="button">Clear</button>
+      <button class="btn ghost small" value="cancel" formnovalidate>Close</button>
+    </div>
+    <p class="llm-status" id="llm-status"></p>
+  </form>
+</dialog>
+
+<footer><div class="wrap">
+  <svg viewBox="0 0 64 64" class="foot-ico"><use href="#turbine"/></svg>
+  WindADBench · MIT License ·
+  <a href="https://github.com/CreatBySu/windadbench">github.com/CreatBySu/windadbench</a>
+</div></footer>
+
+<script src="data.js"></script>
+<script src="core.js"></script>
+<script src="views.js"></script>
+<script src="policy.js"></script>
+<script src="explain.js"></script>
+<script src="agent.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
