@@ -5,6 +5,7 @@
 </p>
 
 <p align="center">
+  <a href="https://zju-daily.github.io/WindADBench/">Website</a> ·
   <a href="#overview">Overview</a> ·
   <a href="#data">Data</a> ·
   <a href="#quick-start">Quick Start</a> ·
@@ -19,9 +20,10 @@
 
 ## ✨ Overview
 
-WindADBench evaluates wind-turbine SCADA anomaly detectors as **alarm systems**.
-It compares 36 detectors from six model families across four evaluation tracks,
-covering detection quality, warning earliness, reliability, and cost.
+We introduce WindADBench to evaluate wind-turbine SCADA anomaly detectors as
+**alarm systems**. We compare 36 detectors from six model families across four
+evaluation tracks, covering detection quality, warning earliness, reliability,
+and cost.
 
 ### Highlights
 
@@ -41,8 +43,8 @@ covering detection quality, warning earliness, reliability, and cost.
 | Normal sequences | 11 | 9 | 31 | 51 |
 | All sequences | 22 | 15 | 58 | 95 |
 
-The 95 event-centered sequences contain 10-minute SCADA measurements spanning
-approximately 89 turbine-years.
+We organize the data into 95 event-centered sequences with 10-minute SCADA
+measurements spanning approximately 89 turbine-years.
 
 ### Evaluation Tracks
 
@@ -53,14 +55,14 @@ approximately 89 turbine-years.
 | **Track 3** | Cross-turbine | Fixed held-out turbines within each farm |
 | **Track 4** | Cross-farm | Six directed transfers among Farms A, B, and C |
 
-Tracks 1–2 use each farm's full sensor schema. Tracks 3–4 use the shared semantic
-features `wind_speed`, `active_power`, and `rotor_speed`.
+We use each farm's full sensor schema in Tracks 1–2 and the shared semantic
+features `wind_speed`, `active_power`, and `rotor_speed` in Tracks 3–4.
 
 ---
 
 ## 📊 Data
 
-> **Note:** The raw datasets are not stored in this repository because of their
+> **Note:** We do not store the raw datasets in this repository because of their
 > size. Place the three wind-farm directories in the repository root as follows.
 
 ```text
@@ -82,8 +84,8 @@ WindADBench/
         └── feature_description.csv
 ```
 
-Each farm contains event sequences, event metadata, and feature descriptions.
-The benchmark builds `WIND_AD_META.csv` from this structure when needed.
+For each farm, we provide event sequences, event metadata, and feature
+descriptions. We build `WIND_AD_META.csv` from this structure when needed.
 
 ---
 
@@ -99,8 +101,8 @@ conda env create -f environment.yml
 conda activate wind_benchmark
 ```
 
-External model weights are not included. Download instructions, expected paths,
-and checksums are provided in [models/README.md](models/README.md).
+We do not include external model weights. Follow the download instructions,
+expected paths, and checksums in [models/README.md](models/README.md).
 
 ---
 
@@ -143,4 +145,4 @@ WindADBench/
 └── tsad_benchmark/            # Benchmark implementation
 ```
 
-Experiment settings are recorded in the configuration files and launch scripts.
+We record the experiment settings in the configuration files and launch scripts.
