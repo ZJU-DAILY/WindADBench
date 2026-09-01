@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/framework.png" width="95%" alt="WindADBench framework">
+  <img src="assets/framework.png" width="85%" alt="WindADBench framework">
 </p>
 
 ---
@@ -65,7 +65,8 @@ semantic features `wind_speed`, `active_power`, and `rotor_speed`.
 
 ## 📊 Data
 
-> **Note:** The raw datasets are not included in this repository because of
+> **Data:** Download the [CARE to Compare dataset](https://doi.org/10.5281/zenodo.14006163)
+> from Zenodo. The raw datasets are not included in this repository because of
 > their size. Place the three wind-farm directories in the repository root as
 > follows.
 
