@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/framework.png" width="85%" alt="WindADBench framework">
+  <img src="assets/framework_final.png" width="85%" alt="WindADBench framework">
 </p>
 
 ---
