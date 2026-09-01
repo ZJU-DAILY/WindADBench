@@ -16,9 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="assets/overview.pdf">
-    <img src="assets/overview.png" width="85%" alt="WindADBench overview">
-  </a>
+  <img src="assets/framework.png" width="85%" alt="WindADBench framework">
 </p>
 
 ---
