@@ -1,0 +1,18 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "LODA",
+      "model_path": "tsad_benchmark.baselines.machine_learning.loda.LODAModel",
+      "model_hyper_params": {
+        "n_bins": 10,
+        "n_random_cuts": 100,
+        "contamination": 0.05
+      },
+      "expected_output": "score",
+      "transfer_adapter": "point_concat"
+    }
+  ]
+}

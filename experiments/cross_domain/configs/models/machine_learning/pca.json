@@ -1,0 +1,18 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "PCA",
+      "model_path": "tsad_benchmark.baselines.machine_learning.pca.PCAModel",
+      "model_hyper_params": {
+        "weighted": true,
+        "standardization": true,
+        "contamination": 0.05
+      },
+      "expected_output": "score",
+      "transfer_adapter": "point_concat"
+    }
+  ]
+}

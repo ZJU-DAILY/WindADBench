@@ -1,0 +1,19 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "OCSVM",
+      "model_path": "tsad_benchmark.baselines.machine_learning.ocsvm.OCSVMModel",
+      "model_hyper_params": {
+        "kernel": "rbf",
+        "nu": 0.05,
+        "gamma": "auto",
+        "contamination": 0.05
+      },
+      "expected_output": "score",
+      "transfer_adapter": "point_concat"
+    }
+  ]
+}

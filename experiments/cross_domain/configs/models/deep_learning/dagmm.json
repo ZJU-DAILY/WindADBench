@@ -1,0 +1,21 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "DAGMM",
+      "model_path": "tsad_benchmark.baselines.machine_learning.dagmm.DAGMMModel",
+      "model_hyper_params": {
+        "hidden_dim": 64,
+        "n_gmm": 4,
+        "sequence_len": 1,
+        "num_epochs": 10,
+        "batch_size": 256,
+        "lr": 0.0001
+      },
+      "expected_output": "score",
+      "transfer_adapter": "model_segmented"
+    }
+  ]
+}

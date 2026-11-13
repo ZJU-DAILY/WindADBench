@@ -1,0 +1,23 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "DCdetector",
+      "model_path": "tsad_benchmark.baselines.deep_learning.dcdetector.DCdetectorModel",
+      "model_hyper_params": {
+        "win_size": 105,
+        "patch_size": [
+          3,
+          5,
+          7
+        ],
+        "num_epochs": 3,
+        "batch_size": 16
+      },
+      "expected_output": "score",
+      "transfer_adapter": "dlbase_segmented"
+    }
+  ]
+}

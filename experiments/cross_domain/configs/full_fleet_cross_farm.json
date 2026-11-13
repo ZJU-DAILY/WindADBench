@@ -1,0 +1,33 @@
+{
+  "workload_id": "full_fleet_cross_farm_v1",
+  "dataset_root": "derived_datasets/core3_v1_care_v6",
+  "evaluation_dataset_root": ".",
+  "features": ["wind_speed", "active_power", "rotor_speed"],
+  "model_hyper_params": {
+    "tsad_benchmark.baselines.deep_learning.usad.USADModel": {"win_size": 12, "num_epochs": 10}
+  },
+  "protocol": {
+    "evaluation_protocol": "care_unified_v6_target_status_benchmark_empty_v1",
+    "source_training": "all_source_assets_train_segments",
+    "target_evaluation": "all_target_assets_prediction_segments",
+    "temporal_start_policy": "repeat_first_prediction_point_if_required",
+    "normalization": "model_native_source_fit_only",
+    "imputation": {
+      "source_training": "source_farm_train_median",
+      "strict_zero_shot": "source_farm_train_median",
+      "target_normal_calibrated": "target_event_train_median"
+    },
+    "evaluation_protocols": ["strict_zero_shot"],
+    "evaluation_tracks": ["score", "label"],
+    "label_policy": "protocol_fpr_threshold",
+    "empty_alarm_affiliation": "benchmark",
+    "false_positive_budget": 0.01,
+    "defer_score_vus": false,
+    "aggregation": "sequence_equal_event_support_normal_exposure_direction_equal_v1",
+    "points_per_day": 144,
+    "lead_delta_points": 72,
+    "lead_horizon_points": 288,
+    "allow_legacy_global_scores": false,
+    "seed": 2026
+  }
+}

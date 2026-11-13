@@ -1,0 +1,18 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "KNN",
+      "model_path": "tsad_benchmark.baselines.machine_learning.knn.KNNModel",
+      "model_hyper_params": {
+        "n_neighbors": 5,
+        "method": "largest",
+        "contamination": 0.05
+      },
+      "expected_output": "score",
+      "transfer_adapter": "point_concat"
+    }
+  ]
+}

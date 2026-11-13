@@ -1,0 +1,18 @@
+{
+  "recommend_hyper_params": {
+    "seed": 2026
+  },
+  "models": [
+    {
+      "model_name": "AnomalyTransformer",
+      "model_path": "tsad_benchmark.baselines.deep_learning.anomaly_transformer.AnomalyTransformerModel",
+      "model_hyper_params": {
+        "win_size": 100,
+        "lr": 0.0001,
+        "num_epochs": 3
+      },
+      "expected_output": "score",
+      "transfer_adapter": "dlbase_segmented"
+    }
+  ]
+}
